@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "node --watch index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,9 @@
     "url": "https://github.com/reaganluyinda/Fullstackopen-part4/issues"
   },
   "homepage": "https://github.com/reaganluyinda/Fullstackopen-part4#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^8.21.0"
+  }
 }
