@@ -10,7 +10,19 @@ blogsRouter.get('/', async (request, response) => {
 
 //route for adding a new blog
 blogsRouter.post('/', async (request, response) => {
-  const blog = new Blog(request.body)
+
+  if(!request.body.title || !request.body.url){
+    return response.status(400).json({ error: 'title and url are required' })
+  }
+
+  const blog = new Blog({
+    title: request.body.title,
+    author: request.body.author,
+    url: request.body.url,
+    likes: request.body.likes || 0,
+  })
+
+
 
   const savedBlog = await blog.save()
   response.status(201).json(savedBlog)

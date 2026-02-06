@@ -4,7 +4,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const Blog = require('../models/blog')
 const helper = require('./test_helper')
-const { test, after, beforeEach } = require('node:test')
+const { test, after, beforeEach, describe } = require('node:test')
 
 
 const api = supertest(app)
@@ -21,13 +21,10 @@ test('blogs are returned as json and the correct amount', async () => {
     .expect(200)
     .expect('Content-Type', /application\/json/)
   assert.strictEqual(response.body.length, helper.initialBlogs.length)
-  console.log(response.body)
+  //   console.log(response.body)
 
 })
 
-after(async () => {
-  await mongoose.connection.close
-})
 
 //test for id property
 test('blogs have an id property', async () => {
@@ -36,7 +33,7 @@ test('blogs have an id property', async () => {
 
   assert(blog.id)
   assert.strictEqual(blog._id, undefined)
-  console.log(response.body)
+  //   console.log(response.body)
 
 })
 
@@ -71,7 +68,7 @@ test('a valid blog can be added', async () => {
 })
 
 //test blog missing likes
-test.only('if likes property is missing, it defaults to 0', async () => {
+test('if likes property is missing, it defaults to 0', async () => {
   const newBlog = {
     title: 'Test Blog Without Likes',
     author: 'Reagan Beckams',
@@ -84,8 +81,57 @@ test.only('if likes property is missing, it defaults to 0', async () => {
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  //   const response = await api.get('/api/blogs')
-  //   const blogWithoutLikes = response.body.find(b => b.title === 'Test Blog Without Likes')
+
 
   assert.strictEqual(response.body.likes, 0)
+})
+
+//test for blog missing title and url
+describe('test a blog without title and url', () => {
+  test('blog without title is not added', async () => {
+    const newBlog = {
+      author: 'reagan beckams',
+      url: 'http://www.testblogwithouttitleandurl.com',
+      likes: 5,
+    }
+
+    const blogsAtStart = await helper.blogInDb()
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+
+    const blogsAtEnd = await helper.blogInDb()
+
+    assert.strictEqual(blogsAtEnd.length, blogsAtStart.length)
+
+
+  })
+
+
+  test('blog without url is not added', async () => {
+    const newBlog = {
+      title: 'Test Blog Without URL',
+      author: 'Reagan Beckams',
+      likes: 5,
+    }
+
+    const blogsAtStart = await helper.blogInDb()
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+
+    const blogsAtEnd = await helper.blogInDb()
+
+    assert.strictEqual(blogsAtEnd.length, blogsAtStart.length)
+
+
+  })
+})
+
+after(async () => {
+  await mongoose.connection.close
 })
