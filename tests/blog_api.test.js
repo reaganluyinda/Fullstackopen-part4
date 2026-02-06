@@ -41,7 +41,7 @@ test('blogs have an id property', async () => {
 })
 
 //test for adding a new blog
-test.only('a valid blog can be added', async () => {
+test('a valid blog can be added', async () => {
   const newBlog = {
     title: 'Test Blog',
     author: 'Reagan Beckams',
@@ -68,4 +68,24 @@ test.only('a valid blog can be added', async () => {
   assert(titles.includes('Test Blog'))
   //   console.log(response.body)
 
+})
+
+//test blog missing likes
+test.only('if likes property is missing, it defaults to 0', async () => {
+  const newBlog = {
+    title: 'Test Blog Without Likes',
+    author: 'Reagan Beckams',
+    url: 'http://www.testblogwithoutlikes.com',
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  //   const response = await api.get('/api/blogs')
+  //   const blogWithoutLikes = response.body.find(b => b.title === 'Test Blog Without Likes')
+
+  assert.strictEqual(response.body.likes, 0)
 })
