@@ -14,7 +14,8 @@ beforeEach(async () => {
   await Blog.insertMany(helper.initialBlogs)
 })
 
-test.only('blogs are returned as json and the correct amount', async () => {
+//test for get and json
+test('blogs are returned as json and the correct amount', async () => {
   const response = await api
     .get('/api/blogs')
     .expect(200)
@@ -26,4 +27,14 @@ test.only('blogs are returned as json and the correct amount', async () => {
 
 after(async () => {
   await mongoose.connection.close
+})
+
+test.only('blogs have an id property', async () => {
+  const response = await api.get('/api/blogs')
+  const blog = response.body[0]
+
+  assert(blog.id)
+  assert.strictEqual(blog._id, undefined)
+  console.log(response.body)
+
 })
