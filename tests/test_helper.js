@@ -1,6 +1,7 @@
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
-
+//initial blogs for blog tests
 const initialBlogs = [
   {
     title: 'React patterns',
@@ -16,9 +17,23 @@ const initialBlogs = [
   }
 ]
 
+const initialUsers = [
+  {
+    username: 'root',
+    name: 'hakeniemi',
+
+  }
+]
+
 const blogInDb = async () => {
   const blogs = await Blog.find({})
-  return blogs.map(blog => blog.toJSON)
+  return blogs.map(blog => blog.toJSON())
 }
 
-module.exports = { initialBlogs, blogInDb }
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(user => user.toJSON())
+}
+
+
+module.exports = { initialBlogs, blogInDb, usersInDb, initialUsers }

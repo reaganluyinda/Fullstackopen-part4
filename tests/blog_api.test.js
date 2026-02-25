@@ -172,5 +172,5 @@ test('a blog can be updated', async () => {
 })
 
 after(async () => {
-  await mongoose.connection.close
+  await mongoose.connection.close()
 })
