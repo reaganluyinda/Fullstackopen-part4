@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IklkcmlzIiwiaWQiOiI2OTllZDdjNWI5MGM3NjlmZDAyYmExOTgiLCJpYXQiOjE3NzIyMDQ5OTUsImV4cCI6MTc3MjIwODU5NX0.em8rM-3AsH_13aMdI7hwnRgY7YCKFoEC35fGkRY-ccA
+
+{
+  "title": "authorizaton and authentication",
+  "author": "lance stroll",
+  "url": "https://astonmartinbooking.com/",
+  "likes": 7
+}
