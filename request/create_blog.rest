@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IklkcmlzIiwiaWQiOiI2OTllZDdjNWI5MGM3NjlmZDAyYmExOTgiLCJpYXQiOjE3NzIyMDkyMjgsImV4cCI6MTc3MjIxMjgyOH0.26Am74fmx3i2HuZOliOuQsZFOvomGIfiE1D2f7bUtgQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IklkcmlzIiwiaWQiOiI2OTllZDdjNWI5MGM3NjlmZDAyYmExOTgiLCJpYXQiOjE3NzIzNTk2OTgsImV4cCI6MTc3MjM2MzI5OH0.TgI44IVVNS1jQlLDjzYLmf3OSUUDFBH8TBPiN2ua93k
 
 {
   "title": "authorizaton and authentication",
